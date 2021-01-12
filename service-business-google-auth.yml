@@ -26,8 +26,8 @@ spring:
       min-idle: 10
   rabbitmq:
     username: admin
-    password: 123456
-    virtual-host: Qq122345
+    password: Qq122345
+    virtual-host: admin
     addresses: 172.18.9.204:15672
     listener:
       auto-startup: true
