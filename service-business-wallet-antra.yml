@@ -1,0 +1,152 @@
+configParam: coinlim-prod service-business-wallet-antra configParam
+
+spring:
+  datasource:
+    url: jdbc:mysql://rm-j6c94wbftwfg4a259828.mysql.rds.aliyuncs.com:3306/db_ctp?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Hongkong
+    username: ctpuser
+    password: AdJDuojPGLXXxmKVIIKnWm3bk0bHMlBW
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #type: com.alibaba.druid.pool.DruidDataSource
+    type: com.zaxxer.hikari.HikariDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+  redis:
+    host: r-j6c529b046b46cf4.redis.rds.aliyuncs.com
+    port: 6379
+    password: SN3u5Orgg08EP7un
+    timeout: 10000
+    database: 0
+    pool:
+      max-active: 500
+      max-idle: 50
+      max-wait: -1
+      min-idle: 10
+  sms:
+    url: http://sms.easyct.net/webService/restSmsService/smsService/sendSms.json
+    account: zhongsheng
+    password: 5f0ac406cff93e2a826553b5546fe712
+    smsType: zhongsheng
+    subCode: 5243
+  mail:
+    host: smtp.mxhichina.com
+    port: 587
+    username: official@coinlim.com
+    password: Coinlim123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  rabbitmq:
+    username: onechain
+    password: admin
+    virtual-host: onechain
+    addresses: 172.31.36.119:5672,172.31.36.118:5672,172.31.36.117:5672
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 3
+
+#更新用户余额服务
+orderService:
+  with-draw-and-deposit: http://ctp.service-business-order/service-business-order/v1.0/withdrawAndDeposit
+
+#更新用户账户信息消息key
+updateUserBalance:
+  key: updateUserBalance
+updateUserBalanceExchange:
+  exchange: ctpprodexchange
+
+failedMessageRetryCount:
+  retry: 3
+
+usdt:
+  transFee: 0.00001
+  collFee: 0.00005
+
+antraCoinNodeInfo:
+  coinNodeServer: http://172.31.36.151:4757
+  coinNodeUserName: antratest
+  coinNodePassword: af4468c90411840d
+  coinNodePropertyId: 1
+
+coinRpcMethod:
+  # 获取私钥
+  dumpPrivateKey: dumpprivkey
+  # 获取余额
+  getBalance: getbalance
+  getOmniBalance: omni_getbalance
+  # 获取区块确认数
+  getBlockCount: getblockcount
+  # 获取区块链信息
+  getBlockInfo: getblockchaininfo
+  # 获取区块
+  getBlock: getblock
+  # 获取区块哈希
+  getBlockHash: getblockhash
+  # 创建钱包
+  getNewAddress: getnewaddress
+  # 获取节点信息
+  getNodeInfo: getinfo
+  # 获取交易信息
+  getTransaction: gettransaction
+  getOmniTransaction: omni_gettransaction
+  # 获取钱包信息
+  getWalletInfo: omni_getinfo
+  # 列出区块交易
+  listBlockTransactions: listtransactions  #修改1
+  # 根据地址查询比特币余额
+  listAddressGroupings: listaddressgroupings
+  minConfirmation: 1
+  # 转账到指定地址
+  sendToAddress: sendtoaddress
+  #  转账
+  omniSend: omni_send
+  #  校验地址
+  validateAddress: validateaddress
+  #  USDT propertyId
+  usdtConfigPropertyId: 31
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.ctp.jarmodel.model.dbo
+  configuration:
+    map-underscore-to-camel-case: true
+
+logstash:
+  address: 172.31.36.133
+  port: 5000
+logging:
+  level: info
+  config: classpath:logback/logback-default-coinlim-prod.xml
+
+# 暴露监控端点
+management:
+  health:
+    db:
+      enabled: false
+    mail:
+      enabled: false
+    redis:
+      enabled: false
+    mongo:
+      enabled: false
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details:ALWAYS
+endpoints:
+  actuator:
+    enabled: true
+  shutdown:
+    enabled: false

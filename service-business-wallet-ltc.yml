@@ -1,0 +1,91 @@
+configParam: inner-dev service-business-wallet-ltc configParam
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.225:3306/db_ctp_dev?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Hongkong
+    username: block
+    password: pwd123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #type: com.alibaba.druid.pool.DruidDataSource
+    type: com.zaxxer.hikari.HikariDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+  redis:
+    host: 192.168.1.217
+    port: 6379
+    password: dami123
+    timeout: 10000
+    database: 0
+    pool:
+      max-active: 500
+      max-idle: 50
+      max-wait: -1
+      min-idle: 10
+
+  rabbitmq:
+    username: dami
+    password: 123456
+    virtual-host: dami
+    addresses: 192.168.1.13:5672
+    listener:
+      simple:
+        auto-startup: true
+
+geth:
+  ip: http://192.168.1.228:47576
+# 钱包设定
+  newWalletPath: /home/dami/eth/geth/.ethereum/keystore/
+  #废弃内容
+  gasPrice: 6  #GWei
+  gasLimit: 60000
+  fee: 0.003
+  collFee: 0.003
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.ctp.jarmodel.model.dbo
+  configuration:
+    map-underscore-to-camel-case: true
+
+#消息key
+updateUserBalanceKey:
+  key: updateUserBalance
+ethMentionCoinKey:
+  key: ethMentionCoinKey
+
+updateUserBalanceExchange:
+  exchange: ctpprodexchange
+
+#logstash:
+#  address: 172.31.36.133
+#  port: 5000
+#logging:
+#  level: info
+#  config: classpath:logback/logback-default-coinlim-prod.xml
+
+# 暴露监控端点
+management:
+  health:
+    db:
+      enabled: false
+    mail:
+      enabled: false
+    redis:
+      enabled: false
+    mongo:
+      enabled: false
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details:ALWAYS
+endpoints:
+  actuator:
+    enabled: true
+  shutdown:
+    enabled: false

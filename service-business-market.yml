@@ -1,0 +1,90 @@
+configParam: git-inner-test service-business-market configParam
+
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.225:3306/db_ctp?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Hongkong
+    username: block
+    password: pwd123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #type: com.alibaba.druid.pool.DruidDataSource
+    type: com.zaxxer.hikari.HikariDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+  redis:
+    host: 192.168.1.217
+    port: 6379
+    password: dami123
+    timeout: 10000
+    database: 0
+    pool:
+      max-active: 500
+      max-idle: 50
+      max-wait: -1
+      min-idle: 10
+
+  rabbitmq:
+    username: dami
+    password: 123456
+    virtual-host: dami
+    addresses: 192.168.1.13:5672
+
+usdt:
+  transFee: 0.00001
+  collFee: 0.00005
+
+BitCoinTransfer:
+  key: bitcoinTransfer
+EthMentionCoin:
+  key: ethMentionCoinKey
+
+#更新用户余额服务
+orderService:
+  with-draw-and-deposit: http://192.168.1.224:55100/service-business-order/v1.0/withdrawAndDeposit
+#更新用户账户信息消息key
+updateUserBalance:
+  key: updateUserBalance
+updateUserBalanceExchange:
+  exchange: ctpprodexchange
+failedMessageRetryCount:
+  retry: 3
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.ctp.jarmodel.model
+  configuration:
+    map-underscore-to-camel-case: true
+
+# logstash:
+#  address: 192.168.1.212
+#  port: 5044
+# logging:
+#  level: info
+#  config: classpath:logback/logback-default-coinlim-prod.xml
+
+# 暴露监控端点
+management:
+  health:
+    db:
+      enabled: false
+    mail:
+      enabled: false
+    redis:
+      enabled: false
+    mongo:
+      enabled: false
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details:ALWAYS
+endpoints:
+  actuator:
+    enabled: true
+  shutdown:
+    enabled: false

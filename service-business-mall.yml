@@ -1,0 +1,108 @@
+configParam: git-inner-test service-business-mall configParam
+
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.225:3306/db_ctp?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Hongkong
+    username: block
+    password: pwd123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #type: com.alibaba.druid.pool.DruidDataSource
+    type: com.zaxxer.hikari.HikariDataSource
+  # redis配置，以下有默认配置的也可以使用默认配置
+  redis:
+    host: 192.168.1.217
+    port: 6379
+    password: dami123
+    timeout: 10000
+    database: 0
+    pool:
+      max-active: 500
+      max-idle: 50
+      max-wait: -1
+      min-idle: 10
+  rabbitmq:
+    username: dami
+    password: 123456
+    virtual-host: dami
+    addresses: 192.168.1.13:5672
+    listener:
+      auto-startup: true
+
+  # zipkin日志追踪
+  zipkin:
+    # zipkin服务器待配置
+    base-url: http://192.168.1.224:49200
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+# 启用断路机制
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    enabled: true
+hystrix:
+  command:
+    addOrder:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+  threadpool:
+    default:
+      coreSize: 500
+
+# ribbon全局设置，直接用ribbon.<key>=<value>的方式设置ribbon的默认参数
+ribbon:
+  #请求处理的超时时间
+  ReadTimeout: 60000
+  #ribbon请求连接的超时时间
+  ConnectTimeout: 60000
+  #对所有操作请求都进行重试
+  OkToRetryOnAllOperations: true
+  #对当前实例的重试次数
+  MaxAutoRetries: 3
+  #对下个实例的重试次数
+  MaxAutoRetriesNextServer: 3
+
+#指定服务配置
+#为了有针对性的配置，针对各个服务客户端进行个性化配置方式与使用Spring cloud Ribbon时的配置方式一样的，
+#都采用<client>.ribbon.<key>=<value>的格式进行设置
+service-business-order:
+  #ribbon请求连接的超时时间
+  ConnectTimeOut: 10000
+  #请求处理的超时时间
+  ReadTimeout: 10000
+  
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.ctp.jarmodel.model
+  configuration:
+    map-underscore-to-camel-case: true
+
+# 暴露监控端点
+management:
+  health:
+    db:
+      enabled: false
+    mail:
+      enabled: false
+    redis:
+      enabled: false
+    mongo:
+      enabled: false
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details:ALWAYS
+endpoints:
+  actuator:
+    enabled: true
+  shutdown:
+    enabled: false

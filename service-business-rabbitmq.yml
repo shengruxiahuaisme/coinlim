@@ -1,0 +1,64 @@
+configParam: git-inner-test service-business-rabbitmq configParam
+
+spring:
+  # redis配置，以下有默认配置的也可以使用默认配置
+  redis:
+    host: 192.168.1.217
+    port: 6379
+    password: dami123
+    timeout: 10000
+    database: 0
+    pool:
+      max-active: 500
+      max-idle: 50
+      max-wait: -1
+      min-idle: 10
+  rabbitmq:
+    username: dami
+    password: 123456
+    virtual-host: dami
+    addresses: 192.168.1.13:5672
+    listener:
+      simple:
+        auto-startup: true
+        retry:
+          enabled: true
+          max-attempts: 3
+
+#RabbitMq routingKey配置
+onechainmqconf:
+  routingKey: updateUserBalance,bitcoinTransfer,ethMentionCoinKey,OTCUpdateUserBalance,wgrTransfer,obsrTransfer,EDRCTransfer,telosMentionCoin
+  defaultExchange: ctpprodexchange
+
+#logstash:
+#  address: 172.31.36.133
+#  port: 5000
+#logging:
+#  level: info
+#  config: classpath:logback/logback-default-coinlim-prod.xml
+
+# 暴露监控端点
+management:
+  health:
+    db:
+      enabled: false
+    mail:
+      enabled: false
+    redis:
+      enabled: false
+    mongo:
+      enabled: false
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details:ALWAYS
+endpoints:
+  actuator:
+    enabled: true
+  shutdown:
+    enabled: false
