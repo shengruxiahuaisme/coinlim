@@ -18,7 +18,7 @@ spring:
     port: 6379
     password: Gd123
     timeout: 10000
-    database: 0
+    database: 6
     pool:
       max-active: 500
       max-idle: 50
