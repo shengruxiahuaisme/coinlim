@@ -25,10 +25,10 @@ spring:
       max-wait: -1
       min-idle: 10
   rabbitmq:
-    username: dami
+    username: admin
     password: 123456
-    virtual-host: dami
-    addresses: 192.168.1.13:5672
+    virtual-host: Qq122345
+    addresses: 172.18.9.204:15672
     listener:
       auto-startup: true
   jpa:
