@@ -31,7 +31,7 @@ spring:
   # zipkin日志追踪
   zipkin:
     # zipkin服务器待配置
-    base-url: http://192.168.1.224:49200
+    base-url: http://172.18.9.3:49200
   sleuth:
     sampler:
       percentage: 1.0
