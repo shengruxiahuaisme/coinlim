@@ -41,7 +41,7 @@ EthMentionCoin:
 
 #更新用户余额服务
 orderService:
-  with-draw-and-deposit: http://192.168.1.224:55100/service-business-order/v1.0/withdrawAndDeposit
+  with-draw-and-deposit: http://172.18.9.4:55100/service-business-order/v1.0/withdrawAndDeposit
 #更新用户账户信息消息key
 updateUserBalance:
   key: updateUserBalance
