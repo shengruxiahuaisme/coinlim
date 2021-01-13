@@ -43,11 +43,11 @@ spring:
           starttls:
             enable: true
             required: true
-#   elasticjob:
-#     # 分布式任务协调依赖zookeeper
-#     zookeeper:
-#       server-lists: 192.168.1.218:2381
-#       namespace: vonechain-job
+  elasticjob:
+    # 分布式任务协调依赖zookeeper
+    zookeeper:
+      server-lists: 192.168.1.218:2381
+      namespace: vonechain-job
     # 普通任务
     simples:
       ScheduleGenTvData:
