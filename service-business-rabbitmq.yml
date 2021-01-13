@@ -3,21 +3,21 @@ configParam: git-inner-test service-business-rabbitmq configParam
 spring:
   # redis配置，以下有默认配置的也可以使用默认配置
   redis:
-    host: 192.168.1.217
+    host: 161.189.145.104
     port: 6379
-    password: dami123
+    password: Gd123
     timeout: 10000
-    database: 0
+    database: 6
     pool:
       max-active: 500
       max-idle: 50
       max-wait: -1
       min-idle: 10
   rabbitmq:
-    username: dami
-    password: 123456
-    virtual-host: dami
-    addresses: 192.168.1.13:5672
+    username: admin
+    password: Qq122345
+    virtual-host: admin
+    addresses: 172.18.9.204:5672
     listener:
       simple:
         auto-startup: true
