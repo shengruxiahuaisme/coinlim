@@ -2,9 +2,9 @@ configParam: git-inner-test service-business-tradingview configParam
 
 spring:
   datasource:
-    url: jdbc:mysql://192.168.1.211:3306/db_ctp?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Hongkong
-    username: block
-    password: pwd123
+    url: jdbc:mysql://52.82.80.65:3306/db_ctp?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Hongkong
+    username: root
+    password: Gd753951.
     driver-class-name: com.mysql.cj.jdbc.Driver
     #type: com.alibaba.druid.pool.DruidDataSource
     type: com.zaxxer.hikari.HikariDataSource
@@ -12,30 +12,30 @@ spring:
     minIdle: 5
     maxActive: 20
     maxWait: 60000
+  # redis配置，以下有默认配置的也可以使用默认配置
   redis:
-    host: 192.168.1.217
+    host: 161.189.145.104
     port: 6379
-    password: dami123
+    password: Gd123
     timeout: 10000
-    database: 0
+    database: 6
     pool:
       max-active: 500
       max-idle: 50
       max-wait: -1
       min-idle: 10
-
   rabbitmq:
-    username: dami
-    password: 123456
-    virtual-host: dami
-    addresses: 192.168.1.13:5672
+    username: admin
+    password: Qq122345
+    virtual-host: admin
+    addresses: 172.18.9.204:5672
     listener:
       auto-startup: true
-  elasticjob:
-    # 分布式任务协调依赖zookeeper
-    zookeeper:
-      server-lists: 192.168.1.218:2381
-      namespace: vonechain-job
+#   elasticjob:
+#     # 分布式任务协调依赖zookeeper
+#     zookeeper:
+#       server-lists: 192.168.1.218:2381
+#       namespace: vonechain-job
     # 普通任务
     simples:
       ScheduleGenTvData:
