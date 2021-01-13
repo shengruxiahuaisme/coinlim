@@ -28,7 +28,7 @@ spring:
     username: admin
     password: Qq122345
     virtual-host: admin
-    addresses: 172.18.9.204:15672
+    addresses: 172.18.9.204:5672
     listener:
       auto-startup: true
   jpa:
