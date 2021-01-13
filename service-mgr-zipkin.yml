@@ -1,1 +1,66 @@
 configParam: git-inner-test service-business-zipkin configParam
+spring:
+  # redis配置，以下有默认配置的也可以使用默认配置
+  redis:
+    host: 161.189.145.104
+    port: 6379
+    password: Gd123
+    timeout: 10000
+    database: 6
+    pool:
+      max-active: 500
+      max-idle: 50
+      max-wait: -1
+      min-idle: 10
+  rabbitmq:
+    username: admin
+    password: Qq122345
+    virtual-host: admin
+    addresses: 172.18.9.204:5672
+    listener:
+      auto-startup: true
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: servicebusiness.googleauth.model.dbo.AuthDO
+  configuration:
+    map-underscore-to-camel-case: true
+#logstash:
+ # address: 192.168.1.212
+  #port: 5044
+#logging:
+ # level: info
+  #config: classpath:logback/logback-default-inner-test.xml
+#logback日志配置
+#logging:
+#  level: error
+#  config: classpath:logback/logback-default-inner-test.xml
+
+# 暴露监控端点
+management:
+  health:
+    db:
+      enabled: false
+    mail:
+      enabled: false
+    redis:
+      enabled: false
+    mongo:
+      enabled: false
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details:ALWAYS
+endpoints:
+  actuator:
+    enabled: true
+  shutdown:
+    enabled: false
