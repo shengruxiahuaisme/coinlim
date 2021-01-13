@@ -31,6 +31,18 @@ spring:
     addresses: 172.18.9.204:5672
     listener:
       auto-startup: true
+  mail:
+    host: smtp.mxhichina.com
+    port: 587
+    username: 1231345@coinlim.com
+    password: 111
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.ctp.jarmodel.model
